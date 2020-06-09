@@ -16,10 +16,10 @@ xx, yy, zz = np.meshgrid(x_grid, y_grid, z_grid)
 pos_list = np.vstack([xx.ravel(), yy.ravel(), zz.ravel()]).T
 
 # Number of cells in each population
-numPN_A = 100#28801
-numPN_C = 100#28801
-numBask = 10#12978
-numAAC = 10#1420
+numPN_A = 28801
+numPN_C = 28801
+numBask = 12978
+numAAC = 1420
 
 ###################################################################################
 ####################################Pyr Type A#####################################
