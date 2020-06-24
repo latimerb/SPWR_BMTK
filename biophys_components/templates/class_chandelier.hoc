@@ -1,4 +1,4 @@
-begintemplate chandelierWB
+begintemplate chandelier
 
 public init, connect_sections, size_sections, append_sections, define_synapses
 public mechinit, insert_mechs, set_biophys, get_root
@@ -320,4 +320,4 @@ proc define_synapses() {
 	}
 }
 */
-endtemplate chandelierWB
+endtemplate chandelier

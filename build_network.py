@@ -72,7 +72,7 @@ net.add_nodes(N=numAAC, pop_name='AAC',
               positions=positions_list(positions=pos),
               mem_potential='e',
               model_type='biophysical',
-              model_template='hoc:chandelierWB',
+              model_template='hoc:chandelier',
               morphology=None)
 
 #################################################################################
