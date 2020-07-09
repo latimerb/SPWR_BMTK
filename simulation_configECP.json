@@ -31,16 +31,9 @@
     "spikes_file": "spikes.h5"
   },
   "reports": {
-    "v_report": {
-      "variable_name": "v",
-      "cells": "all",
-      "module": "membrane_report",
-      "sections": "soma"
-    },
 
     "ecp": {
-      "cells": "many",
-      "cell_bounds": [0,10286],
+      "cells": "all",
       "variable_name": "v",
       "module": "extracellular",
       "electrode_positions": "$COMPONENTS_DIR/recXelectrodes/linear_electrode.csv",

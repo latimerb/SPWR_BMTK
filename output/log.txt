@@ -1,10 +1,11 @@
-2020-06-18 12:34:02,513 [INFO] Created log file
-2020-06-18 12:34:02,521 [INFO] Running NEURON with mpi (20 cores).
-2020-06-18 12:34:02,719 [INFO] Building cells.
-2020-06-18 12:34:02,730 [INFO] Building recurrent connections
-2020-06-18 12:34:02,736 [INFO] Saving network connections. This may take a while.
-2020-06-18 12:34:02,803 [INFO]     Done saving network connections.
-2020-06-18 12:34:02,803 [INFO] Running simulation for 50.000 ms with the time step 0.100 ms
-2020-06-18 12:34:02,804 [INFO] Starting timestep: 0 at t_sim: 0.000 ms
-2020-06-18 12:34:02,804 [INFO] Block save every 500 steps
-2020-06-18 12:34:02,911 [INFO]     step:500 t_sim:50.00 ms
+2020-07-08 17:07:30,241 [INFO] Created log file
+2020-07-08 17:07:30,243 [INFO] Running NEURON with mpi (40 cores).
+2020-07-08 17:07:31,420 [INFO] Building cells.
+2020-07-08 17:08:22,932 [INFO] Building recurrent connections
+2020-07-08 17:19:23,051 [INFO] Saving network connections. This may take a while.
+2020-07-08 17:30:14,435 [INFO]     Done saving network connections.
+2020-07-08 17:30:14,487 [INFO] Running simulation for 50.000 ms with the time step 0.100 ms
+2020-07-08 17:30:14,487 [INFO] Starting timestep: 0 at t_sim: 0.000 ms
+2020-07-08 17:30:14,487 [INFO] Block save every 500 steps
+2020-07-08 17:30:59,583 [INFO]     step:500 t_sim:50.00 ms
+2020-07-08 17:31:00,337 [INFO] Simulation completed in 45.89 seconds 

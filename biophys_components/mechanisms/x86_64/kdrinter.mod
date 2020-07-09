@@ -1,1 +1,1 @@
-../modfiles//kdrinter.mod
+../modfiles/kdrinter.mod

@@ -1,1 +1,1 @@
-../modfiles//nainter_WB.mod
+../modfiles/nainter_WB.mod

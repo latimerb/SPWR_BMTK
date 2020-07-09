@@ -8,7 +8,7 @@ np.random.seed(123412)
 net = NetworkBuilder("SPWR_biophysical")
 
 # Create the possible x,y,z coordinates
-xside_length = 1400; yside_length = 1400; height = 1400; min_dist = 20;
+xside_length = 600; yside_length = 600; height = 600; min_dist = 20;
 x_grid = np.arange(0,xside_length+min_dist,min_dist)
 y_grid = np.arange(0,yside_length+min_dist,min_dist)
 z_grid = np.arange(0,height+min_dist,min_dist)
@@ -16,10 +16,10 @@ xx, yy, zz = np.meshgrid(x_grid, y_grid, z_grid)
 pos_list = np.vstack([xx.ravel(), yy.ravel(), zz.ravel()]).T
 
 #Number of cells in each population
-numPN_A = 28801
-numPN_C = 28801
-numBask = 12978
-numAAC = 1420
+numPN_A = 10800
+numPN_C = 10800
+numBask = 4860
+numAAC = 540
 #numPN_A=30
 #numPN_C=30
 #numBask=15
@@ -90,7 +90,7 @@ net.add_nodes(N=numBask, pop_name='Bask',
               positions=positions_list(positions=pos),
               mem_potential='e',
               model_type='biophysical',
-              model_template='hoc:chandelierWB',
+              model_template='hoc:basket',
               morphology=None)
 ################################################################################
 ############################# BACKGROUND INPUTS ################################
@@ -105,7 +105,7 @@ thalamus.add_nodes(N=numPN_A+numPN_C,
 ##############################################################################
 ############################## CONNECT CELLS #################################
 
-def dist_conn_perc(src, trg, prob=0.1, min_dist=0.0, max_dist=300.0, min_syns=1, max_syns=2):
+def dist_conn_perc(src, trg, min_dist=0.0, max_dist=300.0, min_syns=1, max_syns=2, A=0.2, B=0.2):
     
     sid = src.node_id
     tid = trg.node_id
@@ -117,6 +117,7 @@ def dist_conn_perc(src, trg, prob=0.1, min_dist=0.0, max_dist=300.0, min_syns=1,
         trg_pos = trg['positions']
     dist =np.sqrt((src_pos[0]-trg_pos[0])**2+(src_pos[1]-trg_pos[1])**2+(src_pos[2]-trg_pos[2])**2)
         #print("src_pos: {} trg_pos: {} dist: {}".format(src_pos,trg_pos,dist))        
+    prob = A*np.exp(-B*dist)
 
     if dist <= max_dist and np.random.uniform() < prob:
         tmp_nsyn = np.random.randint(min_syns, max_syns)
@@ -129,7 +130,8 @@ def dist_conn_perc(src, trg, prob=0.1, min_dist=0.0, max_dist=300.0, min_syns=1,
 # Create connections between Pyr --> Bask cells
 net.add_edges(source={'pop_name': ['PyrA','PyrC']}, target={'pop_name': 'Bask'},
               connection_rule=dist_conn_perc,
-          connection_params={'prob':0.10,'min_dist':0.0,'max_dist':300.0,'min_syns':1,'max_syns':2},
+              connection_params={'min_dist':0.0,'max_dist':300.0,
+			         'min_syns':1,'max_syns':2,'A':0.3217,'B':0.005002},
               syn_weight=5.0e-03,
               weight_function='lognormal',
               weight_sigma=1.0e-03,
@@ -142,7 +144,8 @@ net.add_edges(source={'pop_name': ['PyrA','PyrC']}, target={'pop_name': 'Bask'},
 # Create connections between Bask --> Pyr cells
 net.add_edges(source={'pop_name': 'Bask'}, target={'pop_name': ['PyrA','PyrC']},
               connection_rule=dist_conn_perc,
-          connection_params={'prob':0.03,'min_dist':0.0,'max_dist':300.0,'min_syns':1,'max_syns':2},
+              connection_params={'min_dist':0.0,'max_dist':300.0,
+			     'min_syns':1,'max_syns':2,'A':0.3217,'B':0.005002},
               syn_weight=5.0e-03,
               weight_function='lognormal',
               weight_sigma=1.0e-03,
@@ -155,7 +158,8 @@ net.add_edges(source={'pop_name': 'Bask'}, target={'pop_name': ['PyrA','PyrC']},
 # Create connections between AAC --> Pyr cells
 net.add_edges(source={'pop_name': 'AAC'}, target={'pop_name': ['PyrA','PyrC']},
               connection_rule=dist_conn_perc,
-          connection_params={'prob':0.03,'min_dist':0.0,'max_dist':300.0,'min_syns':1,'max_syns':2},
+              connection_params={'min_dist':0.0,'max_dist':300.0,
+			     'min_syns':1,'max_syns':2,'A':0.3217,'B':0.005002},
               syn_weight=5.0e-03,
               weight_function='lognormal',
               weight_sigma=1.0e-03,
@@ -164,6 +168,14 @@ net.add_edges(source={'pop_name': 'AAC'}, target={'pop_name': ['PyrA','PyrC']},
               distance_range=[0.0, 300.0],
               target_sections=['somatic'],
               delay=2.0)
+
+#net.add_gap_junctions(source={'pop_name': 'Bask'}, 
+#		      target={'pop_name': 'Bask'},
+# 		      resistance = 0.01, target_sections=['somatic'], 
+#		      connection_rule=dist_conn_perc,
+#		      connection_params={'prob':0.08,'min_dist':0.0,
+#					'max_dist':300.0,'min_syns':1,
+#					'max_syns':2})
 
 net.build()
 net.save_nodes(output_dir='network')
@@ -221,7 +233,6 @@ from bmtk.utils.sim_setup import build_env_bionet
 build_env_bionet(base_dir='./',
 		network_dir='./network',
 		tstop=1000.0, dt = 0.1,
-		report_vars=['v'],
 		spikes_inputs=[('mthalamus',   # Name of population which spikes will be generated for
                                 'mthalamus_spikes.h5')],
 		#current_clamp={     

@@ -1,1 +1,1 @@
-../modfiles//kdrinter_WB.mod
+../modfiles/kdrinter_WB.mod

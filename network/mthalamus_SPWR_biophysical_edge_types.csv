@@ -1,0 +1,3 @@
+edge_type_id target_query source_query delay syn_weight distance_range dynamics_params weight_function target_sections model_template weight_sigma
+100 pop_name=='PyrA' * 2.0 0.012 "[0.0, 300.0]" AMPA_ExcToExc.json gaussianBL ['somatic'] Exp2Syn 0.001
+101 pop_name=='PyrC' * 2.0 0.012 "[0.0, 300.0]" AMPA_ExcToExc.json gaussianBL ['somatic'] Exp2Syn 0.001

@@ -1,0 +1,61 @@
+Running model at Wed Jul  8 17:07:22 PDT 2020
+numprocs=40
+NEURON -- VERSION 8.0.dev-131-g2e9bc718 master (2e9bc718) 2020-07-07
+Duke, Yale, and the BlueBrain Project -- Copyright 1984-2019
+See http://neuron.yale.edu/neuron/credits
+
+--------------------------------------------------------------------------
+A process has executed an operation involving a call to the
+"fork()" system call to create a child process.  Open MPI is currently
+operating in a condition that could result in memory corruption or
+other system errors; your job may hang, crash, or produce silent
+data corruption.  The use of fork() (or system() or other calls that
+create child processes) is strongly discouraged.
+
+The process that invoked fork was:
+
+  Local host:          [[43369,1],36] (PID 25252)
+
+If you are *absolutely sure* that your application will successfully
+and correctly survive a call to fork(), you may disable this warning
+by setting the mpi_warn_on_fork MCA parameter to 0.
+--------------------------------------------------------------------------
+[comet-14-02.sdsc.edu:02071] 39 more processes have sent help message help-opal-runtime.txt / opal_init:warn-fork
+[comet-14-02.sdsc.edu:02071] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+2020-07-08 17:07:30,241 [INFO] Created log file
+2020-07-08 17:07:30,243 [INFO] Running NEURON with mpi (40 cores).
+Additional mechanisms from files
+ modfiles/CaDynamics.mod modfiles/cadyn.mod modfiles/Ca_HVA.mod modfiles/Ca_LVA.mod modfiles/capool.mod modfiles/gap.mod modfiles/h.mod modfiles/Ih.mod modfiles/im.mod modfiles/Im.mod modfiles/Im_v2.mod modfiles/kaprox.mod modfiles/Kd.mod modfiles/kdrca1.mod modfiles/kdrinter.mod modfiles/kdrinter_WB.mod modfiles/K_P.mod modfiles/K_T.mod modfiles/Kv2like.mod modfiles/Kv3_1.mod modfiles/kv.mod modfiles/leakinter.mod modfiles/leak.mod modfiles/na12.mod modfiles/na16.mod modfiles/na3.mod modfiles/nainter.mod modfiles/nainter_WB.mod modfiles/nap.mod modfiles/Nap.mod modfiles/NaTa.mod modfiles/NaTs.mod modfiles/NaV.mod modfiles/sahp.mod modfiles/SK.mod modfiles/vecevent.mod
+2020-07-08 17:07:31,420 [INFO] Building cells.
+2020-07-08 17:08:22,932 [INFO] Building recurrent connections
+2020-07-08 17:19:23,051 [INFO] Saving network connections. This may take a while.
+2020-07-08 17:30:14,435 [INFO]     Done saving network connections.
+2020-07-08 17:30:14,487 [INFO] Running simulation for 50.000 ms with the time step 0.100 ms
+2020-07-08 17:30:14,487 [INFO] Starting timestep: 0 at t_sim: 0.000 ms
+2020-07-08 17:30:14,487 [INFO] Block save every 500 steps
+2020-07-08 17:30:59,583 [INFO]     step:500 t_sim:50.00 ms
+2020-07-08 17:31:00,337 [INFO] Simulation completed in 45.89 seconds 
+--------------------------------------------------------------------------
+orterun has exited due to process rank 31 with PID 25247 on
+node comet-14-06 exiting improperly. There are three reasons this could occur:
+
+1. this process did not call "init" before exiting, but others in
+the job did. This can cause a job to hang indefinitely while it waits
+for all processes to call "init". By rule, if one process calls "init",
+then ALL processes must call "init" prior to termination.
+
+2. this process called "init", but exited without calling "finalize".
+By rule, all processes that call "init" MUST call "finalize" prior to
+exiting or it will be considered an "abnormal termination"
+
+3. this process called "MPI_Abort" or "orte_abort" and the mca parameter
+orte_create_session_dirs is set to false. In this case, the run-time cannot
+detect that the abort call was an abnormal termination. Hence, the only
+error message you will receive is this one.
+
+This may have caused other processes in the application to be
+terminated by signals sent by orterun (as reported here).
+
+You can avoid this message by specifying -quiet on the orterun command line.
+--------------------------------------------------------------------------
+Done running model at Wed Jul  8 17:31:02 PDT 2020
