@@ -20,10 +20,6 @@ numPN_A = 10800
 numPN_C = 10800
 numBask = 4860
 numAAC = 540
-#numPN_A=30
-#numPN_C=30
-#numBask=15
-#numAAC=5
 
 ###################################################################################
 ####################################Pyr Type A#####################################
@@ -169,11 +165,11 @@ net.add_edges(source={'pop_name': 'AAC'}, target={'pop_name': ['PyrA','PyrC']},
               target_sections=['somatic'],
               delay=2.0)
 
-#net.add_gap_junctions(source={'pop_name': 'Bask'}, 
-#		      target={'pop_name': 'Bask'},
+#net.add_gap_junctions(source={'pop_name': ['Bask']}, 
+#		      target={'pop_name': ['Bask']},
 # 		      resistance = 0.01, target_sections=['somatic'], 
 #		      connection_rule=dist_conn_perc,
-#		      connection_params={'prob':0.08,'min_dist':0.0,
+#		      connection_params={'min_dist':0.0,
 #					'max_dist':300.0,'min_syns':1,
 #					'max_syns':2})
 

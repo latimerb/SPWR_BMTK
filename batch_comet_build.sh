@@ -17,7 +17,7 @@ export LD_LIBRARY_PATH=$HOME/neuron/nrn/x86_64/lib:$LD_LIBRARY_PATH
 export PATH=$HOME/neuron/nrn/x86_64/bin:$PATH
 
 rm mthalamus_spikes.h5
-rm -rf network
+rm -rf network/*
 
 echo "Building model at $(date)"
 
