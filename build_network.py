@@ -123,8 +123,35 @@ def dist_conn_perc(src, trg, min_dist=0.0, max_dist=300.0, min_syns=1, max_syns=
 
     return tmp_nsyn
 
+def one_to_one(source, target):
+    
+    sid = source.node_id
+    tid = target.node_id
+    if sid == tid:
+    #print("connecting cell {} to {}".format(sid,tid))
+        tmp_nsyn = 1
+    else:
+        return None
+
+    return tmp_nsyn
+
+
 # Create connections between Pyr --> Bask cells
 net.add_edges(source={'pop_name': ['PyrA','PyrC']}, target={'pop_name': 'Bask'},
+              connection_rule=dist_conn_perc,
+              connection_params={'min_dist':0.0,'max_dist':300.0,
+			         'min_syns':1,'max_syns':2,'A':0.3217,'B':0.005002},
+              syn_weight=5.0e-03,
+              weight_function='lognormal',
+              weight_sigma=1.0e-03,
+              dynamics_params='AMPA_ExcToExc.json',
+              model_template='Exp2Syn',
+              distance_range=[0.0, 300.0],
+              target_sections=['somatic'],
+              delay=2.0)
+
+# Create connections between Pyr --> AAC cells
+net.add_edges(source={'pop_name': ['PyrA','PyrC']}, target={'pop_name': 'AAC'},
               connection_rule=dist_conn_perc,
               connection_params={'min_dist':0.0,'max_dist':300.0,
 			         'min_syns':1,'max_syns':2,'A':0.3217,'B':0.005002},
@@ -165,14 +192,35 @@ net.add_edges(source={'pop_name': 'AAC'}, target={'pop_name': ['PyrA','PyrC']},
               target_sections=['somatic'],
               delay=2.0)
 
-#net.add_gap_junctions(source={'pop_name': ['Bask']}, 
-#		      target={'pop_name': ['Bask']},
-# 		      resistance = 0.01, target_sections=['somatic'], 
-#		      connection_rule=dist_conn_perc,
-#		      connection_params={'min_dist':0.0,
-#					'max_dist':300.0,'min_syns':1,
-#					'max_syns':2})
+net.add_gap_junctions(source={'pop_name': ['Bask']}, 
+		      target={'pop_name': ['Bask']},
+ 		      resistance = 0.01, target_sections=['somatic'], 
+		      connection_rule=dist_conn_perc,
+		      connection_params={'min_dist':0.0,
+					'max_dist':300.0,'min_syns':1,
+					'max_syns':2})
 
+net.add_edges(source=thalamus.nodes(), target=net.nodes(pop_name='PyrA'),
+                   connection_rule=one_to_one,
+                   syn_weight=12.0e-03,
+                   weight_function='gaussianBL',
+                   weight_sigma=1.0e-03,
+                   target_sections=['somatic'],
+                   delay=2.0,
+                   distance_range=[0.0, 300.0],
+                   dynamics_params='AMPA_ExcToExc.json',
+                   model_template='Exp2Syn')
+
+net.add_edges(source=thalamus.nodes(), target=net.nodes(pop_name='PyrC'),
+                   connection_rule=one_to_one,
+                   syn_weight=12.0e-03,
+                   weight_function='gaussianBL',
+                   weight_sigma=1.0e-03,
+                   target_sections=['somatic'],
+                   delay=2.0,
+                   distance_range=[0.0, 300.0],
+                   dynamics_params='AMPA_ExcToExc.json',
+                   model_template='Exp2Syn')
 net.build()
 net.save_nodes(output_dir='network')
 net.save_edges(output_dir='network')
@@ -181,45 +229,12 @@ print("Internal nodes and edges built")
 
 # Create connections between "thalamus" and Pyramidals
 # First define the connection rule
-def one_to_one(source, target):
-    
-    sid = source.node_id
-    tid = target.node_id
-    if sid == tid:
-    #print("connecting cell {} to {}".format(sid,tid))
-        tmp_nsyn = 1
-    else:
-        return None
-
-    return tmp_nsyn
-
-thalamus.add_edges(source=thalamus.nodes(), target=net.nodes(pop_name='PyrA'),
-                   connection_rule=one_to_one,
-                   syn_weight=12.0e-03,
-                   weight_function='gaussianBL',
-                   weight_sigma=1.0e-03,
-                   target_sections=['somatic'],
-                   delay=2.0,
-                   distance_range=[0.0, 300.0],
-                   dynamics_params='AMPA_ExcToExc.json',
-                   model_template='Exp2Syn')
-
-thalamus.add_edges(source=thalamus.nodes(), target=net.nodes(pop_name='PyrC'),
-                   connection_rule=one_to_one,
-                   syn_weight=12.0e-03,
-                   weight_function='gaussianBL',
-                   weight_sigma=1.0e-03,
-                   target_sections=['somatic'],
-                   delay=2.0,
-                   distance_range=[0.0, 300.0],
-                   dynamics_params='AMPA_ExcToExc.json',
-                   model_template='Exp2Syn')
 
 # Build and save our network
 
 thalamus.build()
 thalamus.save_nodes(output_dir='network')
-thalamus.save_edges(output_dir='network')
+
 #
 #print("External nodes and edges built")
 

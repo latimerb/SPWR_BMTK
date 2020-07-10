@@ -34,6 +34,10 @@
         "edges_file": "$NETWORK_DIR/SPWR_biophysical_SPWR_biophysical_edges.h5"
       }
     ],
-    "gap_juncs": []
+    "gap_juncs": [
+      {
+        "gap_juncs_file": "/home/latimerb/SPWR_BMTK/network/SPWR_biophysical_gap_juncs.h5"
+      }
+    ]
   }
 }
