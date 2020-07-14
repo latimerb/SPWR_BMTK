@@ -1,11 +1,11 @@
 #!/bin/bash
-#SBATCH --partition compute
+#SBATCH --partition debug
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH -A TG-DBS180005
 #SBATCH --job-name=full_build
 #SBATCH --output=full_build.out
-#SBATCH --time 0-03:00
+#SBATCH --time 0-00:30
 
 
 module purge
@@ -16,7 +16,7 @@ export PYTHONPATH=$HOME/neuron/nrn/lib/python:$PYTHONPATH
 export LD_LIBRARY_PATH=$HOME/neuron/nrn/x86_64/lib:$LD_LIBRARY_PATH
 export PATH=$HOME/neuron/nrn/x86_64/bin:$PATH
 
-rm mthalamus_spikes.h5
+rm PN_bg_spikes.h5
 rm -rf network/*
 
 echo "Building model at $(date)"

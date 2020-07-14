@@ -31,13 +31,13 @@
   "config_path": "/home/latimerb/SPWR_BMTK/simulation_config.json",
   "config_dir": "/home/latimerb/SPWR_BMTK",
   "components": {
-    "mechanisms_dir": "/home/latimerb/SPWR_BMTK/biophys_components/mechanisms",
-    "point_neuron_models_dir": "/home/latimerb/SPWR_BMTK/biophys_components/point_neuron_models",
     "__pycache___dir": "/home/latimerb/SPWR_BMTK/biophys_components/__pycache__",
     "morphologies_dir": "/home/latimerb/SPWR_BMTK/biophys_components/morphologies",
-    "templates_dir": "/home/latimerb/SPWR_BMTK/biophys_components/templates",
     "synaptic_models_dir": "/home/latimerb/SPWR_BMTK/biophys_components/synaptic_models",
-    "biophysical_neuron_models_dir": "/home/latimerb/SPWR_BMTK/biophys_components/biophysical_neuron_models"
+    "biophysical_neuron_models_dir": "/home/latimerb/SPWR_BMTK/biophys_components/biophysical_neuron_models",
+    "mechanisms_dir": "/home/latimerb/SPWR_BMTK/biophys_components/mechanisms",
+    "point_neuron_models_dir": "/home/latimerb/SPWR_BMTK/biophys_components/point_neuron_models",
+    "templates_dir": "/home/latimerb/SPWR_BMTK/biophys_components/templates"
   },
   "networks": {
     "nodes": [
@@ -60,11 +60,7 @@
         "edges_file": "/home/latimerb/SPWR_BMTK/network/SPWR_biophysical_SPWR_biophysical_edges.h5"
       }
     ],
-    "gap_juncs": [
-      {
-        "gap_juncs_file": "/home/latimerb/SPWR_BMTK/network/SPWR_biophysical_gap_juncs.h5"
-      }
-    ]
+    "gap_juncs": []
   },
   "node_sets": {
     "biophysical_nodes": {

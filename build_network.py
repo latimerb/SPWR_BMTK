@@ -1,6 +1,7 @@
 from bmtk.builder import NetworkBuilder
 import numpy as np
 from bmtk.builder.auxi.node_params import positions_cuboid, positions_list
+import synapses
 
 np.random.seed(123412)
 
@@ -16,11 +17,14 @@ xx, yy, zz = np.meshgrid(x_grid, y_grid, z_grid)
 pos_list = np.vstack([xx.ravel(), yy.ravel(), zz.ravel()]).T
 
 #Number of cells in each population
-numPN_A = 10800
-numPN_C = 10800
-numBask = 4860
-numAAC = 540
+numPN_A = 1080
+numPN_C = 1080
+numBask = 486
+numAAC = 54
 
+# Load synapse dictionaries
+synapses.load()
+syn = synapses.syn_params_dicts()
 ###################################################################################
 ####################################Pyr Type A#####################################
 
@@ -136,61 +140,75 @@ def one_to_one(source, target):
     return tmp_nsyn
 
 
+# Create connections between Pyr --> Pyr cells
+conn = net.add_edges(source={'pop_name': ['PyrA','PyrC']}, target={'pop_name': ['PyrA','PyrC']},
+              connection_rule=dist_conn_perc,
+              connection_params={'min_dist':0.0,'max_dist':300.0,
+			         'min_syns':1,'max_syns':2,'A':0.01366,'B':0.008618},
+              syn_weight=5.0e-03,
+              weight_function='lognormal',
+              weight_sigma=1.0e-03,
+              dynamics_params='PN2PN.json',
+              model_template=syn['PN2PN.json']['level_of_detail'],
+              distance_range=[0.0, 300.0],
+              target_sections=['somatic'],
+              delay=2.0)
+
 # Create connections between Pyr --> Bask cells
-net.add_edges(source={'pop_name': ['PyrA','PyrC']}, target={'pop_name': 'Bask'},
+conn = net.add_edges(source={'pop_name': ['PyrA','PyrC']}, target={'pop_name': 'Bask'},
               connection_rule=dist_conn_perc,
               connection_params={'min_dist':0.0,'max_dist':300.0,
 			         'min_syns':1,'max_syns':2,'A':0.3217,'B':0.005002},
               syn_weight=5.0e-03,
               weight_function='lognormal',
               weight_sigma=1.0e-03,
-              dynamics_params='AMPA_ExcToExc.json',
-              model_template='Exp2Syn',
+              dynamics_params='PN2INT.json',
+              model_template=syn['PN2INT.json']['level_of_detail'],
               distance_range=[0.0, 300.0],
               target_sections=['somatic'],
               delay=2.0)
 
 # Create connections between Pyr --> AAC cells
-net.add_edges(source={'pop_name': ['PyrA','PyrC']}, target={'pop_name': 'AAC'},
-              connection_rule=dist_conn_perc,
-              connection_params={'min_dist':0.0,'max_dist':300.0,
-			         'min_syns':1,'max_syns':2,'A':0.3217,'B':0.005002},
-              syn_weight=5.0e-03,
-              weight_function='lognormal',
-              weight_sigma=1.0e-03,
-              dynamics_params='AMPA_ExcToExc.json',
-              model_template='Exp2Syn',
-              distance_range=[0.0, 300.0],
-              target_sections=['somatic'],
-              delay=2.0)
+#net.add_edges(source={'pop_name': ['PyrA','PyrC']}, target={'pop_name': 'AAC'},
+#              connection_rule=dist_conn_perc,
+#              connection_params={'min_dist':0.0,'max_dist':300.0,
+#			         'min_syns':1,'max_syns':2,'A':0.3217,'B':0.005002},
+#              syn_weight=5.0e-03,
+#              weight_function='lognormal',
+#              weight_sigma=1.0e-03,
+#              dynamics_params='AMPA_ExcToExc.json',
+#              model_template='Exp2Syn',
+#              distance_range=[0.0, 300.0],
+#              target_sections=['somatic'],
+#              delay=2.0)
 
 # Create connections between Bask --> Pyr cells
-net.add_edges(source={'pop_name': 'Bask'}, target={'pop_name': ['PyrA','PyrC']},
+conn = net.add_edges(source={'pop_name': 'Bask'}, target={'pop_name': ['PyrA','PyrC']},
               connection_rule=dist_conn_perc,
               connection_params={'min_dist':0.0,'max_dist':300.0,
 			     'min_syns':1,'max_syns':2,'A':0.3217,'B':0.005002},
               syn_weight=5.0e-03,
               weight_function='lognormal',
               weight_sigma=1.0e-03,
-              dynamics_params='GABA_InhToExc.json',
-              model_template='Exp2Syn',
+              dynamics_params='INT2PN.json',
+              model_template=syn['INT2PN.json']['level_of_detail'],
               distance_range=[0.0, 300.0],
               target_sections=['somatic'],
               delay=2.0)
 
 # Create connections between AAC --> Pyr cells
-net.add_edges(source={'pop_name': 'AAC'}, target={'pop_name': ['PyrA','PyrC']},
-              connection_rule=dist_conn_perc,
-              connection_params={'min_dist':0.0,'max_dist':300.0,
-			     'min_syns':1,'max_syns':2,'A':0.3217,'B':0.005002},
-              syn_weight=5.0e-03,
-              weight_function='lognormal',
-              weight_sigma=1.0e-03,
-              dynamics_params='GABA_AAC.json',
-              model_template='Exp2Syn',
-              distance_range=[0.0, 300.0],
-              target_sections=['somatic'],
-              delay=2.0)
+#net.add_edges(source={'pop_name': 'AAC'}, target={'pop_name': ['PyrA','PyrC']},
+#              connection_rule=dist_conn_perc,
+#              connection_params={'min_dist':0.0,'max_dist':300.0,
+#			     'min_syns':1,'max_syns':2,'A':0.3217,'B':0.005002},
+#              syn_weight=5.0e-03,
+#              weight_function='lognormal',
+#              weight_sigma=1.0e-03,
+#              dynamics_params='GABA_AAC.json',
+#              model_template='Exp2Syn',
+#              distance_range=[0.0, 300.0],
+#              target_sections=['somatic'],
+#              delay=2.0)
 
 net.add_gap_junctions(source={'pop_name': ['Bask']}, 
 		      target={'pop_name': ['Bask']},
@@ -202,8 +220,8 @@ net.add_gap_junctions(source={'pop_name': ['Bask']},
 
 net.add_edges(source=thalamus.nodes(), target=net.nodes(pop_name='PyrA'),
                    connection_rule=one_to_one,
-                   syn_weight=12.0e-03,
-                   weight_function='gaussianBL',
+                   syn_weight=5.0e-03,
+                   weight_function='lognormal',
                    weight_sigma=1.0e-03,
                    target_sections=['somatic'],
                    delay=2.0,
@@ -213,8 +231,8 @@ net.add_edges(source=thalamus.nodes(), target=net.nodes(pop_name='PyrA'),
 
 net.add_edges(source=thalamus.nodes(), target=net.nodes(pop_name='PyrC'),
                    connection_rule=one_to_one,
-                   syn_weight=12.0e-03,
-                   weight_function='gaussianBL',
+                   syn_weight=5.0e-03,
+                   weight_function='lognormal',
                    weight_sigma=1.0e-03,
                    target_sections=['somatic'],
                    delay=2.0,

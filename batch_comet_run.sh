@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#SBATCH --partition compute
-#SBATCH --nodes=8
+#SBATCH --partition debug
+#SBATCH --nodes=1
 #SBATCH --ntasks-per-node=24
 #SBATCH -A TG-DBS180005
 #SBATCH --job-name=full_run

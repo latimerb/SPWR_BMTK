@@ -3,11 +3,12 @@
 import os, sys
 from bmtk.simulator import bionet
 import numpy as np
+import synapses
 
 def run(config_file):
 
 
-    
+    synapses.load()
     from bmtk.simulator.bionet.pyfunction_cache import add_weight_function
 
     def gaussianBL(edge_props, source, target):

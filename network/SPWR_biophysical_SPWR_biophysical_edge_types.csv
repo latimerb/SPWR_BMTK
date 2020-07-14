@@ -1,5 +1,5 @@
-edge_type_id target_query source_query model_template weight_function dynamics_params target_sections weight_sigma delay is_gap_junction syn_weight distance_range
-100 pop_name=='Bask' "pop_name=='['PyrA', 'PyrC']'" Exp2Syn lognormal AMPA_ExcToExc.json ['somatic'] 0.001 2.0 NULL 0.005 "[0.0, 300.0]"
-101 "pop_name=='['PyrA', 'PyrC']'" pop_name=='Bask' Exp2Syn lognormal GABA_InhToExc.json ['somatic'] 0.001 2.0 NULL 0.005 "[0.0, 300.0]"
-102 "pop_name=='['PyrA', 'PyrC']'" pop_name=='AAC' Exp2Syn lognormal GABA_AAC.json ['somatic'] 0.001 2.0 NULL 0.005 "[0.0, 300.0]"
-103 pop_name=='['Bask']' pop_name=='['Bask']' NULL NULL NULL ['somatic'] NULL NULL True 0.01 "[0.0, 300.0]"
+edge_type_id target_query source_query weight_function syn_weight target_sections distance_range delay model_template is_gap_junction dynamics_params weight_sigma
+100 "pop_name=='['PyrA', 'PyrC']'" "pop_name=='['PyrA', 'PyrC']'" lognormal 0.005 ['somatic'] "[0.0, 300.0]" 2.0 pyr2pyr NULL PN2PN.json 0.001
+101 pop_name=='Bask' "pop_name=='['PyrA', 'PyrC']'" lognormal 0.005 ['somatic'] "[0.0, 300.0]" 2.0 pyr2int NULL PN2INT.json 0.001
+102 "pop_name=='['PyrA', 'PyrC']'" pop_name=='Bask' lognormal 0.005 ['somatic'] "[0.0, 300.0]" 2.0 int2pyr NULL INT2PN.json 0.001
+103 pop_name=='['Bask']' pop_name=='['Bask']' NULL 0.01 ['somatic'] "[0.0, 300.0]" NULL NULL True NULL NULL
