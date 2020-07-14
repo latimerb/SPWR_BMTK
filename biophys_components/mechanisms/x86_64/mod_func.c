@@ -3,6 +3,7 @@
 extern int nrnmpi_myid;
 extern int nrn_nobanner_;
 
+extern void _bg2pyr_reg(void);
 extern void _CaDynamics_reg(void);
 extern void _cadyn_reg(void);
 extern void _Ca_HVA_reg(void);
@@ -47,6 +48,7 @@ void modl_reg(){
   if (!nrn_nobanner_) if (nrnmpi_myid < 1) {
     fprintf(stderr, "Additional mechanisms from files\n");
 
+    fprintf(stderr," modfiles/bg2pyr.mod");
     fprintf(stderr," modfiles/CaDynamics.mod");
     fprintf(stderr," modfiles/cadyn.mod");
     fprintf(stderr," modfiles/Ca_HVA.mod");
@@ -88,6 +90,7 @@ void modl_reg(){
     fprintf(stderr," modfiles/vecevent.mod");
     fprintf(stderr, "\n");
   }
+  _bg2pyr_reg();
   _CaDynamics_reg();
   _cadyn_reg();
   _Ca_HVA_reg();

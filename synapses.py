@@ -6,8 +6,52 @@ from bmtk.simulator.bionet.pyfunction_cache import add_synapse_model
 from neuron import h
 import random
 
+def Bg2Pyr(syn_params, sec_x, sec_id):
+    """Create a bg2pyr synapse
+    :param syn_params: parameters of a synapse
+    :param sec_x: normalized distance along the section
+    :param sec_id: target section
+    :return: NEURON synapse object
+    """
+
+    lsyn = h.bg2pyr(sec_x, sec=sec_id)
+
+    if syn_params.get('initW'):
+        lsyn.initW = float(syn_params['initW'])
+    if syn_params.get('taun1'):
+        lsyn.taun1 = float(syn_params['taun1'])
+    if syn_params.get('taun2'):
+        lsyn.taun2 = float(syn_params['taun2'])
+    if syn_params.get('gNMDAmax'):
+        lsyn.gNMDAmax = float(syn_params['gNMDAmax'])
+    if syn_params.get('enmda'):
+        lsyn.enmda = float(syn_params['enmda'])
+    if syn_params.get('taua1'):
+        lsyn.taua1 = float(syn_params['taua1'])
+    if syn_params.get('taua2'):
+        lsyn.taua2 = float(syn_params['taua2'])
+    if syn_params.get('gAMPAmax'):
+        lsyn.gAMPAmax = float(syn_params['gAMPAmax'])
+    if syn_params.get('eampa'):
+        lsyn.eampa = float(syn_params['eampa'])
+    return lsyn
+
+
+def bg2pyr(syn_params, xs, secs):
+    """Create a list of bg2pyr synapses
+    :param syn_params: parameters of a synapse
+    :param xs: list of normalized distances along the section
+    :param secs: target sections
+    :return: list of NEURON synpase objects
+    """
+    syns = []
+    for x, sec in zip(xs, secs):
+        syn = Pyr2Pyr(syn_params, x, sec)
+        syns.append(syn)
+    return syns
+
 def Pyr2Int(syn_params, sec_x, sec_id):
-    """Create a pyr2pyr synapse
+    """Create a pyr2int synapse
     :param syn_params: parameters of a synapse
     :param sec_x: normalized distance along the section
     :param sec_id: target section
@@ -265,6 +309,8 @@ def pyr2pyr(syn_params, xs, secs):
 
 
 def load():
+    add_synapse_model(Bg2Pyr, 'bg2pyr', overwrite=False)
+    add_synapse_model(Bg2Pyr, overwrite=False)
     add_synapse_model(Pyr2Pyr, 'pyr2pyr', overwrite=False)
     add_synapse_model(Pyr2Pyr, overwrite=False)
     add_synapse_model(Pyr2Int, 'pyr2int', overwrite=False)

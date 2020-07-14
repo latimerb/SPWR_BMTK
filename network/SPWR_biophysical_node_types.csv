@@ -1,5 +1,5 @@
-node_type_id model_template morphology model_type mem_potential pop_name
-100 hoc:stylized_typeC  biophysical e PyrA
-101 hoc:stylized_typeC  biophysical e PyrC
-102 hoc:chandelier  biophysical e AAC
-103 hoc:basket  biophysical e Bask
+node_type_id morphology mem_potential model_template model_type pop_name
+100  e hoc:stylized_typeC biophysical PyrA
+101  e hoc:stylized_typeC biophysical PyrC
+102  e hoc:chandelier biophysical AAC
+103  e hoc:basket biophysical Bask

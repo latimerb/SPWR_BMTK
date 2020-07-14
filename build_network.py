@@ -226,8 +226,8 @@ net.add_edges(source=thalamus.nodes(), target=net.nodes(pop_name='PyrA'),
                    target_sections=['somatic'],
                    delay=2.0,
                    distance_range=[0.0, 300.0],
-                   dynamics_params='AMPA_ExcToExc.json',
-                   model_template='Exp2Syn')
+                   dynamics_params='BG2PN.json',
+                   model_template=syn['BG2PN.json']['level_of_detail'])
 
 net.add_edges(source=thalamus.nodes(), target=net.nodes(pop_name='PyrC'),
                    connection_rule=one_to_one,
@@ -237,8 +237,8 @@ net.add_edges(source=thalamus.nodes(), target=net.nodes(pop_name='PyrC'),
                    target_sections=['somatic'],
                    delay=2.0,
                    distance_range=[0.0, 300.0],
-                   dynamics_params='AMPA_ExcToExc.json',
-                   model_template='Exp2Syn')
+                   dynamics_params='BG2PN.json',
+                   model_template=syn['BG2PN.json']['level_of_detail'])
 net.build()
 net.save_nodes(output_dir='network')
 net.save_edges(output_dir='network')
@@ -262,6 +262,7 @@ from bmtk.utils.sim_setup import build_env_bionet
 build_env_bionet(base_dir='./',
 		network_dir='./network',
 		tstop=1000.0, dt = 0.1,
+		report_vars = ['v'],
 		spikes_inputs=[('mthalamus',   # Name of population which spikes will be generated for
                                 'mthalamus_spikes.h5')],
 		#current_clamp={     

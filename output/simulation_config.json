@@ -25,7 +25,14 @@
     "output_dir": "/home/latimerb/SPWR_BMTK/output",
     "spikes_file": "/home/latimerb/SPWR_BMTK/output/spikes.h5"
   },
-  "reports": {},
+  "reports": {
+    "v_report": {
+      "variable_name": "v",
+      "cells": "all",
+      "module": "membrane_report",
+      "sections": "soma"
+    }
+  },
   "node_sets_file": "/home/latimerb/SPWR_BMTK/node_sets.json",
   "network": "/home/latimerb/SPWR_BMTK/circuit_config.json",
   "config_path": "/home/latimerb/SPWR_BMTK/simulation_config.json",
