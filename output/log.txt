@@ -1,7 +1,10 @@
-2020-07-20 12:07:44,288 [INFO] Created log file
-2020-07-20 12:07:44,440 [INFO] Building cells.
-2020-07-20 12:07:44,841 [INFO] Building recurrent connections
-2020-07-20 12:07:46,768 [INFO] Building virtual cell stimulations for mthalamus_spikes
-2020-07-20 12:07:47,581 [INFO] Running simulation for 1000.000 ms with the time step 0.100 ms
-2020-07-20 12:07:47,582 [INFO] Starting timestep: 0 at t_sim: 0.000 ms
-2020-07-20 12:07:47,582 [INFO] Block save every 5000 steps
+2020-07-20 14:09:24,780 [INFO] Created log file
+2020-07-20 14:09:24,920 [INFO] Building cells.
+2020-07-20 14:09:25,274 [INFO] Building recurrent connections
+2020-07-20 14:09:27,286 [INFO] Building virtual cell stimulations for mthalamus_spikes
+2020-07-20 14:09:28,061 [INFO] Running simulation for 1000.000 ms with the time step 0.100 ms
+2020-07-20 14:09:28,062 [INFO] Starting timestep: 0 at t_sim: 0.000 ms
+2020-07-20 14:09:28,062 [INFO] Block save every 5000 steps
+2020-07-20 14:10:28,283 [INFO]     step:5000 t_sim:500.00 ms
+2020-07-20 14:11:28,374 [INFO]     step:10000 t_sim:1000.00 ms
+2020-07-20 14:11:28,661 [INFO] Simulation completed in 2.0 minutes, 0.6002 seconds 

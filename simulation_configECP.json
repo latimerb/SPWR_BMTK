@@ -34,7 +34,7 @@
 
     "ecp": {
       "cells": "many",
-      "cell_bounds": [0,799],
+      "cell_bounds": [0,79],
       "variable_name": "v",
       "module": "extracellular",
       "electrode_positions": "$COMPONENTS_DIR/recXelectrodes/linear_electrode.csv",
