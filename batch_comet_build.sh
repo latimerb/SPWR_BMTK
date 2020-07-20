@@ -1,11 +1,11 @@
 #!/bin/bash
-#SBATCH --partition debug
+#SBATCH --partition compute
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH -A TG-DBS180005
 #SBATCH --job-name=full_build
 #SBATCH --output=full_build.out
-#SBATCH --time 0-00:30
+#SBATCH --time 0-05:00
 
 
 module purge

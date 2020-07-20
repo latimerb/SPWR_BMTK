@@ -15,6 +15,7 @@ extern void _Ih_reg(void);
 extern void _im_reg(void);
 extern void _Im_reg(void);
 extern void _Im_v2_reg(void);
+extern void _int2int_reg(void);
 extern void _int2pyr_reg(void);
 extern void _kaprox_reg(void);
 extern void _Kd_reg(void);
@@ -60,6 +61,7 @@ void modl_reg(){
     fprintf(stderr," modfiles/im.mod");
     fprintf(stderr," modfiles/Im.mod");
     fprintf(stderr," modfiles/Im_v2.mod");
+    fprintf(stderr," modfiles/int2int.mod");
     fprintf(stderr," modfiles/int2pyr.mod");
     fprintf(stderr," modfiles/kaprox.mod");
     fprintf(stderr," modfiles/Kd.mod");
@@ -102,6 +104,7 @@ void modl_reg(){
   _im_reg();
   _Im_reg();
   _Im_v2_reg();
+  _int2int_reg();
   _int2pyr_reg();
   _kaprox_reg();
   _Kd_reg();

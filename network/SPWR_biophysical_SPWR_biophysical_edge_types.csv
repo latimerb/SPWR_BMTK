@@ -1,5 +1,6 @@
-edge_type_id target_query source_query model_template target_sections is_gap_junction dynamics_params distance_range weight_function syn_weight weight_sigma delay
-100 "pop_name=='['PyrA', 'PyrC']'" "pop_name=='['PyrA', 'PyrC']'" pyr2pyr ['somatic'] NULL PN2PN.json "[0.0, 300.0]" lognormal 0.005 0.001 2.0
-101 pop_name=='Bask' "pop_name=='['PyrA', 'PyrC']'" pyr2int ['somatic'] NULL PN2INT.json "[0.0, 300.0]" lognormal 0.005 0.001 2.0
-102 "pop_name=='['PyrA', 'PyrC']'" pop_name=='Bask' int2pyr ['somatic'] NULL INT2PN.json "[0.0, 300.0]" lognormal 0.005 0.001 2.0
-103 pop_name=='['Bask']' pop_name=='['Bask']' NULL ['somatic'] True NULL "[0.0, 300.0]" NULL 0.01 NULL NULL
+edge_type_id target_query source_query dynamics_params target_sections weight_function distance_range weight_sigma is_gap_junction model_template delay syn_weight
+100 "pop_name=='['PyrA', 'PyrC']'" "pop_name=='['PyrA', 'PyrC']'" PN2PN.json ['basal'] lognormal "[0.0, 300.0]" 0.001 NULL pyr2pyr 0.1 0.005
+101 pop_name=='Bask' "pop_name=='['PyrA', 'PyrC']'" PN2INT.json ['somatic'] lognormal "[0.0, 300.0]" 0.001 NULL pyr2int 0.1 0.005
+102 "pop_name=='['PyrA', 'PyrC']'" pop_name=='Bask' INT2PN.json ['somatic'] lognormal "[0.0, 300.0]" 0.001 NULL int2pyr 0.1 0.005
+103 pop_name=='['Bask']' pop_name=='Bask' INT2INT.json ['somatic'] lognormal "[0.0, 300.0]" 0.001 NULL int2int 0.1 0.005
+104 pop_name=='['Bask']' pop_name=='['Bask']' NULL ['somatic'] NULL "[0.0, 300.0]" NULL True NULL NULL 0.01
