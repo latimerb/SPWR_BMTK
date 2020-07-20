@@ -9,7 +9,7 @@ np.random.seed(123412)
 net = NetworkBuilder("SPWR_biophysical")
 
 # Create the possible x,y,z coordinates
-xside_length = 600; yside_length = 600; height = 300; min_dist = 20;
+xside_length = 100; yside_length = 100; height = 100; min_dist = 20;
 x_grid = np.arange(0,xside_length+min_dist,min_dist)
 y_grid = np.arange(0,yside_length+min_dist,min_dist)
 z_grid = np.arange(0,height+min_dist,min_dist)
@@ -17,9 +17,9 @@ xx, yy, zz = np.meshgrid(x_grid, y_grid, z_grid)
 pos_list = np.vstack([xx.ravel(), yy.ravel(), zz.ravel()]).T
 
 #Number of cells in each population
-numPN_A = 5400
-numPN_C = 5400
-numBask = 2700
+numPN_A = 40
+numPN_C = 40
+numBask = 20
 
 # Load synapse dictionaries
 synapses.load()
