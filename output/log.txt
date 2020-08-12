@@ -1,3 +1,8 @@
-2020-08-12 12:03:02,978 [INFO] Created log file
-2020-08-12 12:03:02,981 [INFO] Running NEURON with mpi (192 cores).
-2020-08-12 12:03:03,416 [INFO] Building cells.
+2020-08-12 13:00:24,958 [INFO] Created log file
+2020-08-12 13:00:24,961 [INFO] Running NEURON with mpi (48 cores).
+2020-08-12 13:00:30,011 [INFO] Building cells.
+2020-08-12 13:00:30,315 [INFO] Building recurrent connections
+2020-08-12 13:00:51,191 [INFO] Building virtual cell stimulations for mthalamus_spikes
+2020-08-12 13:00:58,946 [INFO] Running simulation for 1000.000 ms with the time step 0.100 ms
+2020-08-12 13:00:58,947 [INFO] Starting timestep: 0 at t_sim: 0.000 ms
+2020-08-12 13:00:58,947 [INFO] Block save every 5000 steps
