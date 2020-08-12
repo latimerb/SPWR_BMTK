@@ -2,7 +2,7 @@
   "target_simulator": "NEURON",
   "run": {
     "tstart": 0.0,
-    "tstop": 1000.0,
+    "tstop": 5000,
     "dt": 0.1,
     "dL": 20.0,
     "spike_threshold": -15.0,
@@ -18,6 +18,12 @@
       "module": "sonata",
       "input_file": "/home/latimerb/SPWR_BMTK/mthalamus_spikes.h5",
       "node_set": "mthalamus"
+    },
+    "exc_bg_bask_spikes": {
+      "input_type": "spikes",
+      "module": "sonata",
+      "input_file": "/home/latimerb/SPWR_BMTK/exc_bg_bask_spikes.h5",
+      "node_set": "exc_bg_bask"
     }
   },
   "output": {
@@ -26,18 +32,16 @@
     "spikes_file": "/home/latimerb/SPWR_BMTK/output/spikes.h5"
   },
   "reports": {
-    "ecp": {
-      "cells": "all",
+    "v_report": {
       "variable_name": "v",
-      "module": "extracellular",
-      "electrode_positions": "/home/latimerb/SPWR_BMTK/biophys_components/recXelectrodes/linear_electrode.csv",
-      "file_name": "ecp.h5",
-      "electrode_channels": "all"
+      "cells": "all",
+      "module": "membrane_report",
+      "sections": "soma"
     }
   },
   "node_sets_file": "/home/latimerb/SPWR_BMTK/node_sets.json",
   "network": "/home/latimerb/SPWR_BMTK/circuit_config.json",
-  "config_path": "/home/latimerb/SPWR_BMTK/simulation_configECP.json",
+  "config_path": "/home/latimerb/SPWR_BMTK/simulation_config.json",
   "config_dir": "/home/latimerb/SPWR_BMTK",
   "components": {
     "point_neuron_models_dir": "/home/latimerb/SPWR_BMTK/biophys_components/point_neuron_models",
