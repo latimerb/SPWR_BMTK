@@ -17,7 +17,7 @@ old_library=''
 inherited_linker_flags=' -pthread'
 
 # Libraries that this one depends upon.
-dependency_libs=' -L/home/latimerb/neuron/nrn/x86_64/lib /home/latimerb/neuron/nrn/x86_64/lib/libnrnoc.la /home/latimerb/neuron/nrn/x86_64/lib/liboc.la /home/latimerb/neuron/nrn/x86_64/lib/libmemacs.la /home/latimerb/neuron/nrn/x86_64/lib/libnrnmpi.la /home/latimerb/neuron/nrn/x86_64/lib/libscopmath.la /home/latimerb/neuron/nrn/x86_64/lib/libsparse13.la -lreadline -lncurses /home/latimerb/neuron/nrn/x86_64/lib/libnrniv.la /home/latimerb/neuron/nrn/x86_64/lib/libivoc.la /home/latimerb/neuron/nrn/x86_64/lib/libneuron_gnu.la /home/latimerb/neuron/nrn/x86_64/lib/libmeschach.la /home/latimerb/neuron/nrn/x86_64/lib/libsundials.la /home/latimerb/neuron/nrn/x86_64/lib/libivos.la /opt/openmpi/intel/ib/lib/libmpi.la -L/usr/lib64 -llustreapi /opt/openmpi/intel/ib/lib/libopen-rte.la /opt/openmpi/intel/ib/lib/libopen-pal.la -lrdmacm -libverbs -lnuma -ludev /usr/lib64/libpmi2.la /usr/lib64/libpmi.la /usr/lib64/libslurm.la -lpthread -lrt -lutil -lz /opt/gnu/gcc/lib/../lib64/libstdc++.la -lm -ldl'
+dependency_libs=' -L/home/latimerb/nrn/x86_64/lib /home/latimerb/nrn/x86_64/lib/libnrnoc.la /home/latimerb/nrn/x86_64/lib/liboc.la -lX11 /home/latimerb/nrn/x86_64/lib/libmemacs.la /home/latimerb/nrn/x86_64/lib/libnrnmpi.la /home/latimerb/nrn/x86_64/lib/libscopmath.la /home/latimerb/nrn/x86_64/lib/libsparse13.la -lreadline -lncurses /home/latimerb/nrn/x86_64/lib/libnrniv.la /home/latimerb/nrn/x86_64/lib/libivoc.la /home/latimerb/nrn/x86_64/lib/libneuron_gnu.la /opt/openmpi/intel/ib/lib/libmpi.la -L/usr/lib64 -llustreapi /opt/openmpi/intel/ib/lib/libopen-rte.la /opt/openmpi/intel/ib/lib/libopen-pal.la -lrdmacm -libverbs -lnuma -ludev /usr/lib64/libpmi2.la /usr/lib64/libpmi.la /usr/lib64/libslurm.la -lpthread -lrt -lutil -lz /opt/gnu/gcc/lib/../lib64/libstdc++.la /home/latimerb/nrn/x86_64/lib/libmeschach.la /home/latimerb/nrn/x86_64/lib/libsundials.la -lm -ldl'
 
 # Names of additional weak libraries provided by this library
 weak_library_names=''
@@ -38,4 +38,4 @@ dlopen=''
 dlpreopen=''
 
 # Directory that this library needs to be installed in:
-libdir='/home/latimerb/neuron/nrn/x86_64/lib'
+libdir='/home/latimerb/nrn/x86_64/lib'

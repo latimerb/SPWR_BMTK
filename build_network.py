@@ -9,7 +9,7 @@ np.random.seed(123412)
 net = NetworkBuilder("SPWR_biophysical")
 
 # Create the possible x,y,z coordinates
-xside_length = 100; yside_length = 100; height = 100; min_dist = 20;
+xside_length = 278; yside_length = 278; height = 278; min_dist = 20;
 x_grid = np.arange(0,xside_length+min_dist,min_dist)
 y_grid = np.arange(0,yside_length+min_dist,min_dist)
 z_grid = np.arange(0,height+min_dist,min_dist)
@@ -17,9 +17,9 @@ xx, yy, zz = np.meshgrid(x_grid, y_grid, z_grid)
 pos_list = np.vstack([xx.ravel(), yy.ravel(), zz.ravel()]).T
 
 #Number of cells in each population
-numPN_A = 40
-numPN_C = 40
-numBask = 20
+numPN_A = 1080
+numPN_C = 1080
+numBask = 540
 
 # Load synapse dictionaries
 synapses.load()
@@ -36,7 +36,7 @@ net.add_nodes(N=numPN_A, pop_name='PyrA',
               positions=positions_list(positions=pos),
               mem_potential='e',
               model_type='biophysical',
-              model_template='hoc:stylized_typeC',
+              model_template='hoc:feng_typeC',
               morphology=None)
 
 ##################################################################################
@@ -54,7 +54,7 @@ net.add_nodes(N=numPN_C, pop_name='PyrC',
               positions=positions_list(positions=pos),
               mem_potential='e',
               model_type='biophysical',
-              model_template='hoc:stylized_typeC',
+              model_template='hoc:feng_typeC',
               morphology=None)
 #################################################################################
 ############################# Chandelier ########################################
@@ -101,6 +101,12 @@ thalamus.add_nodes(N=numPN_A+numPN_C,
                    potential='exc',
                    model_type='virtual')
 
+# External inputs
+exc_bg_bask = NetworkBuilder('exc_bg_bask')
+exc_bg_bask.add_nodes(N=numBask,
+                   pop_name='tON',
+                   potential='exc',
+                   model_type='virtual')
 ##############################################################################
 ############################## CONNECT CELLS #################################
 
@@ -159,12 +165,11 @@ def syn_dist_delay_section(source, target, min_delay, sec_id=0, sec_x=0.9):
 dynamics_file = 'PN2PN.json'
 
 conn = net.add_edges(source={'pop_name': ['PyrA','PyrC']}, target={'pop_name': ['PyrA','PyrC']},
+              iterator = 'one_to_one',
               connection_rule=dist_conn_perc,
               connection_params={'min_dist':0.0,'max_dist':300.0,
 			         'min_syns':1,'max_syns':2,'A':0.01366,'B':0.008618},
-              syn_weight=5.0e-03,
-              weight_function='lognormal',
-              weight_sigma=1.0e-03,
+              syn_weight=1,
 	      delay=0.1,
               dynamics_params=dynamics_file,
               model_template=syn[dynamics_file]['level_of_detail'],
@@ -181,15 +186,14 @@ conn = net.add_edges(source={'pop_name': ['PyrA','PyrC']}, target={'pop_name': [
 dynamics_file = 'PN2INT.json'
 
 conn = net.add_edges(source={'pop_name': ['PyrA','PyrC']}, target={'pop_name': 'Bask'},
-              connection_rule=dist_conn_perc,
+              iterator = 'one_to_one',
+	      connection_rule=dist_conn_perc,
               connection_params={'min_dist':0.0,'max_dist':300.0,
 			         'min_syns':1,'max_syns':2,'A':0.3217,'B':0.005002},
-              syn_weight=5.0e-03,
-              weight_function='lognormal',
-              weight_sigma=1.0e-03,
+              syn_weight=1,
 	      delay = 0.1,
-              dynamics_params='PN2INT.json',
-              model_template=syn['PN2INT.json']['level_of_detail'],
+              dynamics_params=dynamics_file,
+              model_template=syn[dynamics_file]['level_of_detail'],
               distance_range=[0.0, 300.0],
               target_sections=['somatic'])
 
@@ -219,12 +223,11 @@ conn = net.add_edges(source={'pop_name': ['PyrA','PyrC']}, target={'pop_name': '
 dynamics_file = 'INT2PN.json'
 
 conn = net.add_edges(source={'pop_name': 'Bask'}, target={'pop_name': ['PyrA','PyrC']},
+              iterator = 'one_to_one',
               connection_rule=dist_conn_perc,
               connection_params={'min_dist':0.0,'max_dist':300.0,
 			     'min_syns':1,'max_syns':2,'A':0.3217,'B':0.005002},
-              syn_weight=5.0e-03,
-              weight_function='lognormal',
-              weight_sigma=1.0e-03,
+              syn_weight=1,
               delay=0.1,
               dynamics_params='INT2PN.json',
               model_template=syn['INT2PN.json']['level_of_detail'],
@@ -258,6 +261,7 @@ conn = net.add_edges(source={'pop_name': 'Bask'}, target={'pop_name': ['PyrA','P
 dynamics_file = 'INT2INT.json'
 
 conn = net.add_edges(source={'pop_name': 'Bask'}, target={'pop_name': ['Bask']},
+              iterator = 'one_to_one',
               connection_rule=dist_conn_perc,
               connection_params={'min_dist':0.0,'max_dist':300.0,
 			     'min_syns':1,'max_syns':2,'A':0.24,'B':0.0},
@@ -278,17 +282,17 @@ conn = net.add_edges(source={'pop_name': 'Bask'}, target={'pop_name': ['Bask']},
 
 net.add_gap_junctions(source={'pop_name': ['Bask']}, 
 		      target={'pop_name': ['Bask']},
- 		      resistance = 0.01, target_sections=['somatic'], 
+ 		      resistance = 0.0001, target_sections=['somatic'], 
 		      connection_rule=dist_conn_perc,
 		      connection_params={'min_dist':0.0,
 					'max_dist':300.0,'min_syns':1,
-					'max_syns':2})
+					'max_syns':2,'A':0.08,'B':0.0})
 
 net.add_edges(source=thalamus.nodes(), target=net.nodes(pop_name='PyrA'),
                    connection_rule=one_to_one,
-                   syn_weight=5.0e-03,
+                   syn_weight=7.0e-03,
                    weight_function='lognormal',
-                   weight_sigma=1.0e-03,
+                   weight_sigma=2.0e-03,
                    target_sections=['basal'],
                    delay=0.1,
                    distance_range=[0.0, 300.0],
@@ -297,14 +301,26 @@ net.add_edges(source=thalamus.nodes(), target=net.nodes(pop_name='PyrA'),
 
 net.add_edges(source=thalamus.nodes(), target=net.nodes(pop_name='PyrC'),
                    connection_rule=one_to_one,
-                   syn_weight=5.0e-03,
+                   syn_weight=7.0e-03,
                    weight_function='lognormal',
-                   weight_sigma=1.0e-03,
+                   weight_sigma=2.0e-03,
                    target_sections=['basal'],
                    delay=0.1,
                    distance_range=[0.0, 300.0],
                    dynamics_params='AMPA_ExcToExc.json',
                    model_template='exp2syn')
+
+net.add_edges(source=exc_bg_bask.nodes(), target=net.nodes(pop_name='Bask'),
+                   connection_rule=one_to_one,
+                   syn_weight=7.0e-03,
+                   weight_function='lognormal',
+                   weight_sigma=2.0e-03,
+                   target_sections=['basal'],
+                   delay=0.1,
+                   distance_range=[0.0, 300.0],
+                   dynamics_params='AMPA_ExcToExc.json',
+                   model_template='exp2syn')
+
 net.build()
 net.save_nodes(output_dir='network')
 net.save_edges(output_dir='network')
@@ -319,6 +335,8 @@ print("Internal nodes and edges built")
 thalamus.build()
 thalamus.save_nodes(output_dir='network')
 
+exc_bg_bask.build()
+exc_bg_bask.save_nodes(output_dir='network')
 #
 #print("External nodes and edges built")
 t_sim = 5000
@@ -330,7 +348,7 @@ build_env_bionet(base_dir='./',
 		tstop=t_sim, dt = 0.1,
 		report_vars = ['v'],
 		spikes_inputs=[('mthalamus',   # Name of population which spikes will be generated for
-                                'mthalamus_spikes.h5')],
+                                'mthalamus_spikes.h5'),('exc_bg_bask','exc_bg_bask_spikes.h5')],
 		#current_clamp={     
                 #     'gids': [0],
                 #     'amp': [0.5], 
@@ -348,3 +366,9 @@ psg.add(node_ids=range(numPN_A+numPN_C),  # Have nodes to match mthalamus
         firing_rate=0.002,    # 15 Hz, we can also pass in a nonhomoegenous function/array
         times=(0.0, t_sim))    # Firing starts at 0 s up to 3 s
 psg.to_sonata('mthalamus_spikes.h5')
+
+psg = PoissonSpikeGenerator(population='exc_bg_bask')
+psg.add(node_ids=range(numBask),  # Have nodes to match mthalamus
+        firing_rate=0.004,    # 15 Hz, we can also pass in a nonhomoegenous function/array
+        times=(0.0, t_sim))    # Firing starts at 0 s up to 3 s
+psg.to_sonata('exc_bg_bask_spikes.h5')

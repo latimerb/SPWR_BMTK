@@ -83,7 +83,11 @@ def Pyr2Int(syn_params, sec_x, sec_id):
         lsyn.Erev_nmda = float(syn_params['Erev_nmda']) # par.x(16)
     
     if syn_params.get('initW'):
-        lsyn.initW = float(syn_params['initW']) * np.random.uniform(0.5,1.0) # par.x(0) * rC.uniform(0.5,1.0)//rand.normal(0.5,1.5) //`rand.repick() 
+        m = 1.5
+        s = 0.5
+        mean = np.log(m) - 0.5 * np.log((s/m)**2+1)
+        std = np.sqrt(np.log((s/m)**2 + 1))
+        lsyn.initW = float(np.random.lognormal(mean,std)) # par.x(0) * rC.uniform(0.5,1.0)//rand.normal(0.5,1.5) //`rand.repick() 
 
     if syn_params.get('Wmax'):
         lsyn.Wmax = float(syn_params['Wmax']) * lsyn.initW # par.x(1) * lsyn.initW
@@ -161,10 +165,13 @@ def Int2Int(syn_params, sec_x, sec_id):
         lsyn.gbar_gaba = float(syn_params['gbar_gaba']) # par.x(24)
     if syn_params.get('Erev_gaba'):
         lsyn.Erev_gaba = float(syn_params['Erev_gaba']) # par.x(16)
-
     
     if syn_params.get('initW'):
-        lsyn.initW = float(syn_params['initW']) * np.random.uniform(0.5,1.0) # par.x(0) * rC.uniform(0.5,1.0)//rand.normal(0.5,1.5) //`rand.repick() 
+        m = 1
+        s = 0.02
+        mean = np.log(m) - 0.5 * np.log((s/m)**2+1)
+        std = np.sqrt(np.log((s/m)**2 + 1))
+        lsyn.initW = float(np.random.lognormal(mean,std)) # par.x(0) * rC.uniform(0.5,1.0)//rand.normal(0.5,1.5) //`rand.repick() 
 
     if syn_params.get('Wmax'):
         lsyn.Wmax = float(syn_params['Wmax']) * lsyn.initW # par.x(1) * lsyn.initW
@@ -234,8 +241,12 @@ def Int2Pyr(syn_params, sec_x, sec_id):
 
     
     if syn_params.get('initW'):
-        lsyn.initW = float(syn_params['initW']) * np.random.uniform(0.5,1.0) # par.x(0) * rC.uniform(0.5,1.0)//rand.normal(0.5,1.5) //`rand.repick() 
-
+        m = 1
+        s = 0.02
+        mean = np.log(m) - 0.5 * np.log((s/m)**2+1)
+        std = np.sqrt(np.log((s/m)**2 + 1))
+        lsyn.initW = float(np.random.lognormal(mean,std)) # par.x(0) * rC.uniform(0.5,1.0)//rand.normal(0.5,1.5) //`rand.repick() 
+    
     if syn_params.get('Wmax'):
         lsyn.Wmax = float(syn_params['Wmax']) * lsyn.initW # par.x(1) * lsyn.initW
     if syn_params.get('Wmin'):
