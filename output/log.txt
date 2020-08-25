@@ -1,20 +1,8 @@
-2020-08-12 14:12:29,274 [INFO] Created log file
-2020-08-12 14:12:29,276 [INFO] Running NEURON with mpi (48 cores).
-2020-08-12 14:12:29,591 [INFO] Building cells.
-2020-08-12 14:12:29,872 [INFO] Building recurrent connections
-2020-08-12 14:12:51,397 [INFO] Building virtual cell stimulations for mthalamus_spikes
-2020-08-12 14:12:54,363 [INFO] Building virtual cell stimulations for exc_bg_bask_spikes
-2020-08-12 14:12:59,098 [INFO] Running simulation for 5000.000 ms with the time step 0.100 ms
-2020-08-12 14:12:59,098 [INFO] Starting timestep: 0 at t_sim: 0.000 ms
-2020-08-12 14:12:59,098 [INFO] Block save every 5000 steps
-2020-08-12 14:13:53,333 [INFO]     step:5000 t_sim:500.00 ms
-2020-08-12 14:14:57,377 [INFO]     step:10000 t_sim:1000.00 ms
-2020-08-12 14:16:59,699 [INFO]     step:15000 t_sim:1500.00 ms
-2020-08-12 14:17:55,121 [INFO]     step:20000 t_sim:2000.00 ms
-2020-08-12 14:18:46,843 [INFO]     step:25000 t_sim:2500.00 ms
-2020-08-12 14:19:37,594 [INFO]     step:30000 t_sim:3000.00 ms
-2020-08-12 14:20:28,425 [INFO]     step:35000 t_sim:3500.00 ms
-2020-08-12 14:21:19,186 [INFO]     step:40000 t_sim:4000.00 ms
-2020-08-12 14:22:09,980 [INFO]     step:45000 t_sim:4500.00 ms
-2020-08-12 14:23:00,969 [INFO]     step:50000 t_sim:5000.00 ms
-2020-08-12 14:26:06,061 [INFO] Simulation completed in 13.0 minutes, 7.529 seconds 
+2020-08-25 15:16:42,560 [INFO] Created log file
+2020-08-25 15:16:42,562 [INFO] Running NEURON with mpi (192 cores).
+2020-08-25 15:16:44,549 [INFO] Building cells.
+2020-08-25 15:16:46,497 [INFO] Building recurrent connections
+2020-08-25 15:17:22,770 [INFO] Building virtual cell stimulations for mthalamus_spikes
+2020-08-25 15:18:27,874 [INFO] Running simulation for 1000.000 ms with the time step 0.100 ms
+2020-08-25 15:18:27,874 [INFO] Starting timestep: 0 at t_sim: 0.000 ms
+2020-08-25 15:18:27,874 [INFO] Block save every 5000 steps

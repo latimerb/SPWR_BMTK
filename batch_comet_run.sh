@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#SBATCH --partition debug
-#SBATCH --nodes=2
+#SBATCH --partition compute
+#SBATCH --nodes=8
 #SBATCH --ntasks-per-node=24
 #SBATCH -A TG-DBS180005
 #SBATCH --job-name=full_run
@@ -22,7 +22,7 @@ rm -rf output
 echo "Running model at $(date)"
 
 #mpirun nrniv -mpi -quiet -python3 run_network.py simulation_config.json
-ibrun nrniv -mpi -python run_network.py simulation_config.json
+ibrun nrniv -mpi -python run_network.py simulation_configECP.json
 #python run_network.py simulation_configECP.json
 
 echo "Done running model at $(date)"
