@@ -38,7 +38,7 @@
   "reports": {
     "v_report": {
       "variable_name": "v",
-      "cells": "all",
+      "cells": [0,11000,25666,25667],
       "module": "membrane_report",
       "sections": "soma"
     }

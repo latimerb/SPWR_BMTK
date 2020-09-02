@@ -31,6 +31,11 @@ def run(config_file):
     conf.build_env()
 
     graph = bionet.BioNetwork.from_config(conf)
+
+    pop = graph._node_populations['SPWR_biophysical']
+    for node in pop.get_nodes():
+        node._node._node_type_props['morphology'] = node.model_template[1]
+
     sim = bionet.BioSimulator.from_config(conf, network=graph)
     sim.run()
     bionet.nrn.quit_execution()
