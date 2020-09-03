@@ -1,2 +1,0 @@
-edge_type_id target_query source_query dynamics_params target_sections syn_weight weight_function delay weight_sigma distance_range model_template
-107 pop_name=='Bask' * AMPA_ExcToExc.json ['basal'] 0.007 lognormal 0.1 0.002 "[0.0, 300.0]" exp2syn
