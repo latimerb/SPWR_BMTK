@@ -5,7 +5,7 @@
 #SBATCH -A TG-DBS180005
 #SBATCH --job-name=full_build
 #SBATCH --output=full_build.out
-#SBATCH --time 0-02:30
+#SBATCH --time 0-05:30
 
 
 module purge
