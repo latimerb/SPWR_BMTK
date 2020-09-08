@@ -16,8 +16,8 @@
   "networks": {
     "nodes": [
       {
-        "nodes_file": "$NETWORK_DIR/mthalamus_nodes.h5",
-        "node_types_file": "$NETWORK_DIR/mthalamus_node_types.csv"
+        "node_types_file": "$NETWORK_DIR/mthalamus_node_types.csv",
+        "nodes_file": "$NETWORK_DIR/mthalamus_nodes.h5"
       },
       {
         "nodes_file": "$NETWORK_DIR/exc_bg_bask_nodes.h5",
@@ -30,16 +30,16 @@
     ],
     "edges": [
       {
-        "edges_file": "$NETWORK_DIR/exc_bg_bask_SPWR_biophysical_edges.h5",
-        "edge_types_file": "$NETWORK_DIR/exc_bg_bask_SPWR_biophysical_edge_types.csv"
-      },
-      {
-        "edges_file": "$NETWORK_DIR/mthalamus_SPWR_biophysical_edges.h5",
-        "edge_types_file": "$NETWORK_DIR/mthalamus_SPWR_biophysical_edge_types.csv"
-      },
-      {
         "edge_types_file": "$NETWORK_DIR/SPWR_biophysical_SPWR_biophysical_edge_types.csv",
         "edges_file": "$NETWORK_DIR/SPWR_biophysical_SPWR_biophysical_edges.h5"
+      },
+      {
+        "edge_types_file": "$NETWORK_DIR/exc_bg_bask_SPWR_biophysical_edge_types.csv",
+        "edges_file": "$NETWORK_DIR/exc_bg_bask_SPWR_biophysical_edges.h5"
+      },
+      {
+        "edge_types_file": "$NETWORK_DIR/mthalamus_SPWR_biophysical_edge_types.csv",
+        "edges_file": "$NETWORK_DIR/mthalamus_SPWR_biophysical_edges.h5"
       }
     ],
     "gap_juncs": [

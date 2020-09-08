@@ -17,9 +17,9 @@ xx, yy, zz = np.meshgrid(x_grid, y_grid, z_grid)
 pos_list = np.vstack([xx.ravel(), yy.ravel(), zz.ravel()]).T
 
 #Number of cells in each population
-numPN_A = 15930
-numPN_C = 6210
-numBask = 4860
+numPN_A = 1593
+numPN_C = 621
+numBask = 486
 
 # Load synapse dictionaries
 synapses.load()
@@ -383,6 +383,7 @@ f = h5py.File('network/SPWR_biophysical_SPWR_biophysical_edges.h5', 'r+')
 #import pdb; pdb.set_trace()
 edges = f['edges']['SPWR_biophysical_to_SPWR_biophysical']
 del edges['0']
+del edges['1']
 #f.move(edges.name+'/0', edges.name+'/1')
 edges.create_group('0')
 edges.create_group('1')
