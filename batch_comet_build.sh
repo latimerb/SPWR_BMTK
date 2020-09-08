@@ -21,7 +21,7 @@ rm -rf network/*
 
 echo "Building model at $(date)"
 
-python build_network_new.py
+python build_network.py
 
 echo "Done building model at $(date)"
 
