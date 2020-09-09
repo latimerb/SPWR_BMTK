@@ -9,7 +9,7 @@ np.random.seed(123412)
 net = NetworkBuilder("SPWR_biophysical")
 
 # Create the possible x,y,z coordinates
-xside_length = 600; yside_length = 600; height = 600; min_dist = 20;
+xside_length = 600; yside_length = 600; height = 300; min_dist = 20;
 x_grid = np.arange(0,xside_length+min_dist,min_dist)
 y_grid = np.arange(0,yside_length+min_dist,min_dist)
 z_grid = np.arange(0,height+min_dist,min_dist)
@@ -21,9 +21,9 @@ pos_list = np.vstack([xx.ravel(), yy.ravel(), zz.ravel()]).T
 #7 minutes with just delay
 #6 minutes just delay but no calculation
 #Number of cells in each population
-numPN_A = 15930
-numPN_C = 6210
-numBask = 4860
+numPN_A = 7965
+numPN_C = 3105
+numBask = 2430
 # numPN_A = 20
 # numPN_C = 20
 # numBask = 10
@@ -201,7 +201,9 @@ conn = net.add_edges(source={'pop_name': ['PyrA','PyrC']}, target={'pop_name': [
               dynamics_params=dynamics_file,
               model_template=syn[dynamics_file]['level_of_detail'],
               distance_range=[0.0, 300.0],
-              target_sections=['basal'])
+              target_sections=['basal'],
+              sec_id=0,
+              sec_x=0.5)
 
 # if add_properties:
 #     if do_pos:
@@ -230,7 +232,9 @@ conn = net.add_edges(source={'pop_name': ['PyrA','PyrC']}, target={'pop_name': '
               dynamics_params=dynamics_file,
               model_template=syn[dynamics_file]['level_of_detail'],
               distance_range=[0.0, 300.0],
-              target_sections=['somatic'])
+              target_sections=['somatic'],
+              sec_id=0,
+              sec_x=0.5)
 
 # if add_properties:
 #     if do_pos:
@@ -275,7 +279,9 @@ conn = net.add_edges(source={'pop_name': 'Bask'}, target={'pop_name': ['PyrA','P
               dynamics_params='INT2PN.json',
               model_template=syn['INT2PN.json']['level_of_detail'],
               distance_range=[0.0, 300.0],
-              target_sections=['somatic'])
+              target_sections=['somatic'],
+              sec_id=0,
+              sec_x=0.5)
 
 # if add_properties:
 #     if do_pos:
@@ -323,7 +329,9 @@ conn = net.add_edges(source={'pop_name': 'Bask'}, target={'pop_name': ['Bask']},
               dynamics_params=dynamics_file,
               model_template=syn[dynamics_file]['level_of_detail'],
               distance_range=[0.0, 300.0],
-              target_sections=['somatic'])
+              target_sections=['somatic'],
+              sec_id=0,
+              sec_x=0.5)
 
 # if add_properties:
 #     if do_pos:
@@ -400,7 +408,7 @@ exc_bg_bask.build()
 exc_bg_bask.save_nodes(output_dir='network')
 #
 #print("External nodes and edges built")
-t_sim = 5000
+t_sim = 500
 
 from bmtk.utils.sim_setup import build_env_bionet
 

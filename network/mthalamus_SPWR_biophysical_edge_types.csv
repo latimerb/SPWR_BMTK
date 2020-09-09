@@ -1,3 +1,3 @@
-edge_type_id target_query source_query weight_function dynamics_params syn_weight distance_range delay weight_sigma target_sections model_template
-105 pop_name=='PyrA' * lognormal AMPA_ExcToExc.json 0.007 "[0.0, 300.0]" 0.1 0.002 ['basal'] exp2syn
-106 pop_name=='PyrC' * lognormal AMPA_ExcToExc.json 0.007 "[0.0, 300.0]" 0.1 0.002 ['basal'] exp2syn
+edge_type_id target_query source_query syn_weight dynamics_params distance_range target_sections delay weight_sigma weight_function model_template
+105 pop_name=='PyrA' * 0.007 AMPA_ExcToExc.json "[0.0, 300.0]" ['basal'] 0.1 0.002 lognormal exp2syn
+106 pop_name=='PyrC' * 0.007 AMPA_ExcToExc.json "[0.0, 300.0]" ['basal'] 0.1 0.002 lognormal exp2syn
